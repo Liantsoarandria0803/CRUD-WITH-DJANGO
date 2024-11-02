@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+<body>
+    <h1>CRUD WITH DJANGO</h1>
+    <div class="TaskList">
+        <h2>LIST OF TASKS</h2>
+        {% for todo in todos %}
+        <p>
+            {{todo}}
+            <a href="{% url 'updateTask' todo.id %}"><button>Modifier</button></a>
+            <a href="{% url 'deleteTask' todo.id %}"><button>Supprimer</button></a>
+        </p>
+        {% endfor %}
+    </div>
+    <form action="{% url 'addTasks' %}" method="post">
+        {% csrf_token %}
+        <h2>ADD TASKS</h2>
+        <input type="text" name="task">
+        <button type="submit">create tasks</button>
+    </form>
+</body>
+</html>
